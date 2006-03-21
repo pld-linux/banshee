@@ -1,7 +1,3 @@
-%define name		banshee
-%define version		0.10.8
-%define release		1%{?dist}
-%define	cflags		--disable-njb --disable-ipod --disable-dev-tests --disable-vlc --disable-xing --disable-daap --disable-helix
 
 %define	mono_version			1.1.10
 %define gstreamer_version		0.8.6
@@ -16,63 +12,73 @@
 
 Summary:	A Mono/GStreamer Based Music Player
 Summary(pl):	Oparty na Mono/GStreamerze odtwarzacz muzyki
-Name: 		%{name}
-Version: 	%{version}
-Release: 	%{release}
+Name: 		banshee
+Version: 	0.10.8
+Release: 	1
 License: 	GPL
 Group: 		Applications/Multimedia
-Source: 	http://banshee-project.org/files/%{name}/%{name}-%{version}.tar.gz
+Source: 	http://banshee-project.org/files/banshee/%{name}-%{version}.tar.gz
 Patch0:		%{name}-stat.patch
 URL: 		http://banshee.aaronbock.net
-BuildRoot: 	%{_tmppath}/%{name}-%{version}
-Obsoletes:	sonance <= %{version}
-Requires: 	mono >= %{mono_version}
+BuildRequires:	dbus-devel >= %{dbus_version}
+BuildRequires:	gnome-desktop-devel >= 2.0
+BuildRequires:	gst-sharp >= %{gst-sharp_version}
+BuildRequires:	gstreamer-GConf >= 0.8
+BuildRequires:	gstreamer-cdparanoia >= 0.8
+BuildRequires:	gstreamer-devel >= %{gstreamer_version}
+BuildRequires:	gstreamer-gnomevfs >= 0.8	
+BuildRequires:	gstreamer-plugins-devel >= %{gstreamer-plugins_version}
+BuildRequires:	gtk-sharp2-gapi >= %{gtk-sharp2_version}
+BuildRequires:	hal-devel >= %{hal_version}
+BuildRequires:	ipod-sharp >= %{ipod_version}
+BuildRequires:	mono-data-sqlite >= %{mono_version}
+BuildRequires:	mono-devel >= %{mono_version}
+BuildRequires:	monodoc
+BuildRequires:	nautilus-cd-burner-devel >= %{nautilus_version}
+BuildRequires:	njb-sharp-devel
+BuildRequires:	sqlite-devel >= %{sqlite_version}
+Requires:	dbus >= %{dbus_version}
+Requires:	dbus-sharp >= %{dbus_version}
+Requires:	gst-sharp >= %{gst-sharp_version}
 Requires:	gstreamer >= %{gstreamer_version}
 Requires:	gstreamer-plugins >= %{gstreamer-plugins_version}
 Requires:	gtk-sharp2 >= %{gtk-sharp2_version}
-Requires:	gst-sharp >= %{gst-sharp_version}
-Requires:	mono-data-sqlite >= %{mono_version}
 Requires:	ipod-sharp >= %{ipod_version}
-Requires:	dbus-sharp >= %{dbus_version}
-Requires:	dbus >= %{dbus_version}
-Requires:	sqlite >= %{sqlite_version}
+Requires:	mono-data-sqlite >= %{mono_version}
 Requires:	njb-sharp
-BuildRequires:	mono-devel >= %{mono_version}
-BuildRequires:	gstreamer-devel >= %{gstreamer_version}
-BuildRequires:	gstreamer-plugins-devel >= %{gstreamer-plugins_version}
-BuildRequires:	gtk-sharp2-gapi >= %{gtk-sharp2_version}
-BuildRequires:	gstreamer-cdparanoia >= 0.8
-BuildRequires:	gstreamer-gnomevfs >= 0.8	
-BuildRequires:	gstreamer-GConf >= 0.8
-BuildRequires:	gnome-desktop-devel >= 2.0
-BuildRequires:	gst-sharp >= %{gst-sharp_version}
-BuildRequires:	ipod-sharp >= %{ipod_version}
-BuildRequires:	dbus-devel >= %{dbus_version}
-BuildRequires:	hal-devel >= %{hal_version}
-BuildRequires:	monodoc
-BuildRequires:	mono-data-sqlite >= %{mono_version}
-BuildRequires:	nautilus-cd-burner-devel >= %{nautilus_version}
-BuildRequires:	sqlite-devel >= %{sqlite_version}
-BuildRequires:	njb-sharp-devel
+Requires:	sqlite >= %{sqlite_version}
+Requires: 	mono >= %{mono_version}
+Obsoletes:	sonance <= %{version}
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Banshee is a brand spankin' new audio player based on the GStreamer 
-media library and is developed on the Open Source Mono .NET Platform, 
+Banshee is a brand spankin' new audio player based on the GStreamer
+media library and is developed on the Open Source Mono .NET Platform,
 written in C#.
+
+%description -l pl
+Banshee to nowy odtwarzacz d¼wiêku oparty na bibliotece odtwarzacza
+multimediów GStreamer, rozwijany na platformie .NET Mono, napisany w
+C#.
 
 %prep
 %setup -q
 %patch0 -p1
 
 %build
-%configure %{cflags}
+%configure \
+	--disable-daap \
+	--disable-dev-tests \
+	--disable-helix
+	--disable-ipod \
+	--disable-njb \
+	--disable-vlc \
+	--disable-xing
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
-install -d \
-	$RPM_BUILD_ROOT%{_datadir}/applications
+install -d $RPM_BUILD_ROOT%{_desktopdir}
 
 export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 %{__make} install \
@@ -83,19 +89,22 @@ unset GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL
 DESKTOPS="banshee.desktop"
 for D in $DESKTOPS; do
 	desktop-file-install --vendor %{desktop_vendor} \
-	--dir $RPM_BUILD_ROOT%{_datadir}/applications	\
+	--dir $RPM_BUILD_ROOT%{_desktopdir}	\
 	--add-category X-Red-Hat-Base	\
 	--add-category Application	\
 	--add-category AudioVideo	\
-	$RPM_BUILD_ROOT%{_datadir}/applications/$D
-	mv $RPM_BUILD_ROOT%{_datadir}/applications/%{desktop_vendor}-$D $RPM_BUILD_ROOT%{_datadir}/applications/$D
+	$RPM_BUILD_ROOT%{_desktopdir}/$D
+	mv $RPM_BUILD_ROOT%{_desktopdir}/%{desktop_vendor}-$D $RPM_BUILD_ROOT%{_desktopdir}/$D
 done
 
 rm -rf $RPM_BUILD_ROOT/var/scrollkeeper
 find $RPM_BUILD_ROOT -name "*.la" -exec rm {} \;
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 %post
-update-desktop-database %{_datadir}/applications
+update-desktop-database %{_desktopdir}
 SCHEMAS="banshee.schemas audioscrobbler.schemas filesystemmonitor.schemas metadatasearch.schemas mmkeys.schemas"
 export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
 for S in $SCHEMAS; do
@@ -105,35 +114,47 @@ for S in $SCHEMAS; do
 done
 
 %postun
-update-desktop-database %{_datadir}/applications
-
-%clean
-rm -rf $RPM_BUILD_ROOT
+update-desktop-database %{_desktopdir}
 
 %files -f %{name}.lang
-%defattr(-, root, root)
+%defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS README 
 %{_sysconfdir}/gconf/schemas/filesystemmonitor.schemas
 %{_sysconfdir}/gconf/schemas/metadatasearch.schemas
 %{_sysconfdir}/gconf/schemas/banshee.schemas
 %{_sysconfdir}/gconf/schemas/audioscrobbler.schemas
 %{_sysconfdir}/gconf/schemas/mmkeys.schemas
-%{_bindir}/banshee
-%{_libdir}/pkgconfig/banshee.pc
+%attr(755,root,root) %{_bindir}/banshee
+%{_pkgconfigdir}/banshee.pc
+%dir %{_libdir}/banshee
 %{_libdir}/banshee/*.dll
-%{_libdir}/banshee/*.a
-%{_libdir}/banshee/*.so
+#%{_libdir}/banshee/*.a
+%attr(755,root,root) %{_libdir}/banshee/*.so
 %{_libdir}/banshee/*.exe
 %{_libdir}/banshee/*.mdb
 %{_libdir}/banshee/*.config
-#%{_libdir}/banshee/Banshee.Dap/
-%{_libdir}/banshee/Banshee.MediaEngine/
-%{_libdir}/banshee/Banshee.Plugins/
-%{_datadir}/applications/banshee.desktop
-%{_datadir}/icons/hicolor/
+#%{_libdir}/banshee/Banshee.Dap
+%{_libdir}/banshee/Banshee.MediaEngine
+%{_libdir}/banshee/Banshee.Plugins
+%{_desktopdir}/banshee.desktop
+%{_iconsdir}/hicolor/*/*/*
 %{_datadir}/dbus-1/services/org.gnome.Banshee.service
 
 %changelog
+* %{date} PLD Team <feedback@pld-linux.org>
+All persons listed below can be reached at <cvs_login>@pld-linux.org
+
+$Log: banshee.spec,v $
+Revision 1.2  2006-03-21 20:27:43  qboosh
+- pl, some cleanups
+
+Revision 1.1  2006/03/20  czarny
+- init PLD spec
+- adaptized from some strange rpm found out there in the net
+- more to do, then done
+- NFY
+- builds and installs only with --nodeps
+
 * Tue Feb 07 2006 Matthew Hall <matt@nrpms.net> 0.10.5-1
 - 0.10.5 Release
 
