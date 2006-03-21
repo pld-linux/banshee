@@ -10,13 +10,12 @@
 Summary:	A Mono/GStreamer Based Music Player
 Summary(pl):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name: 		banshee
-Version: 	0.10.8
+Version: 	0.10.9
 Release: 	0.1
 License: 	GPL
 Group: 		Applications/Multimedia
 Source0: 	http://banshee-project.org/files/banshee/%{name}-%{version}.tar.gz
-# Source0-md5:	cfa4051cd8aba171a09dcb9a3f34fef3
-Patch0:		%{name}-stat.patch
+# Source0-md5:	86b67e399ea805f69a860b3e6fd4627f
 URL: 		http://banshee-project.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -25,15 +24,19 @@ BuildRequires:	dotnet-avahi-devel
 BuildRequires:	dotnet-dbus-sharp-devel
 BuildRequires:	dotnet-gtk-sharp2-devel >= 2.3.92
 BuildRequires:	gnome-desktop-devel
+BuildRequires:	gstreamer-cdparanoia
+BuildRequires:	gstreamer-gnomevfs
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.0
 BuildRequires:	hal-devel >= 0.5.2
 BuildRequires:	libtool
 BuildRequires:	libmusicbrainz-devel
-BuildRequires:	mono-csharp >= 1.1.10
+BuildRequires:	mono-csharp >= 1.1.13
 BuildRequires:	monodoc
 BuildRequires:	nautilus-cd-burner-devel >= 2.12.0
 BuildRequires:	pkgconfig
 BuildRequires:	sqlite3-devel
+Requires:	gstreamer-cdparanoia
+Requires:	gstreamer-gnomevfs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -48,7 +51,6 @@ C#.
 
 %prep
 %setup -q
-#%patch0 -p1
 
 %build
 %configure \
