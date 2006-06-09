@@ -13,7 +13,7 @@ Name: 		banshee
 Version: 	0.10.9
 Release: 	0.1
 License: 	GPL
-Group: 		Applications/Multimedia
+Group:		Applications/Multimedia
 Source0: 	http://banshee-project.org/files/banshee/%{name}-%{version}.tar.gz
 # Source0-md5:	86b67e399ea805f69a860b3e6fd4627f
 URL: 		http://banshee-project.org/
