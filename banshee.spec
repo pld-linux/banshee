@@ -1,7 +1,4 @@
 # ToDo:
-#	- check Patch0
-#	- make avahi.pc work (propable bug in avahi package,
-#		it doesn't make a proper symlink for the .dll
 #	- make some proper bconds for other it
 #
 %include /usr/lib/rpm/macros.mono
@@ -10,33 +7,38 @@
 Summary:	A Mono/GStreamer Based Music Player
 Summary(pl):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name: 		banshee
-Version: 	0.10.9
+Version: 	0.10.12
 Release: 	0.1
 License: 	GPL
 Group:		Applications/Multimedia
 Source0: 	http://banshee-project.org/files/banshee/%{name}-%{version}.tar.gz
-# Source0-md5:	86b67e399ea805f69a860b3e6fd4627f
+# Source0-md5:	13806b7dee6444013dcb1436b4cf0e78
 URL: 		http://banshee-project.org/
-BuildRequires:	autoconf
+BuildRequires:	GConf2-devel
+BuildRequires:	autoconf >= 2.13
 BuildRequires:	automake
-BuildRequires:	avahi-compat-howl-devel
+BuildRequires:	dbus-devel >= 0.60
 BuildRequires:	dotnet-avahi-devel
 BuildRequires:	dotnet-dbus-sharp-devel
-BuildRequires:	dotnet-gtk-sharp2-devel >= 2.3.92
+BuildRequires:	dotnet-gtk-sharp2-devel >= 2.8.0
+BuildRequires:	dotnet-gnome-sharp-devel >= 2.8.0
 BuildRequires:	gnome-desktop-devel
 BuildRequires:	gstreamer-cdparanoia
+BuildRequires:	gstreamer-devel >= 0.10.3
 BuildRequires:	gstreamer-gnomevfs
-BuildRequires:	gstreamer-plugins-base-devel >= 0.10.0
+BuildRequires:	gstreamer-plugins-base-devel >= 0.10.3
+BuildRequires:	gtk+2-devel >= 2.8.0
 BuildRequires:	hal-devel >= 0.5.2
+BuildRequires:	intltool >= 0.21
 BuildRequires:	libtool
-BuildRequires:	libmusicbrainz-devel
+BuildRequires:	libmusicbrainz-devel >= 2.1.1
 BuildRequires:	mono-csharp >= 1.1.13
 BuildRequires:	monodoc
 BuildRequires:	nautilus-cd-burner-devel >= 2.12.0
 BuildRequires:	pkgconfig
 BuildRequires:	sqlite3-devel
-Requires:	gstreamer-cdparanoia
-Requires:	gstreamer-gnomevfs
+Requires:	gstreamer-cdparanoia >= 0.10.3
+Requires:	gstreamer-gnomevfs >= 0.10.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -53,25 +55,32 @@ C#.
 %setup -q
 
 %build
+%{__aclocal}
+%{__libtoolize}
+%{__automake}
+%{__autoconf}
 %configure \
-	--disable-daap \
 	--disable-dev-tests \
 	--disable-helix \
 	--disable-ipod \
 	--disable-njb \
 	--disable-vlc \
-	--disable-xing \
-	--with-gstreamer-0-10
+	--enable-gstreamer \
+	--enable-avahi \
+	--disable-schemas-install
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_desktopdir}
+install -d $RPM_BUILD_ROOT%{_libdir}/monodoc/sources
 
-export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-unset GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL
+
+mv $RPM_BUILD_ROOT%{_docdir}/%{name}/* $RPM_BUILD_ROOT%{_libdir}/monodoc/sources
+
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/*.{la,a}
+
 %find_lang %{name}
 
 %clean
@@ -80,13 +89,13 @@ rm -rf $RPM_BUILD_ROOT
 %post
 umask 022
 [ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
-SCHEMAS="banshee.schemas banshee-notificationareaicon.schemas audioscrobbler.schemas filesystemmonitor.schemas metadatasearch.schemas mmkeys.schemas"
+SCHEMAS="banshee.schemas banshee-notificationareaicon.schemas audioscrobbler.schemas daap.schemas metadatasearch.schemas mmkeys.schemas"
 for S in $SCHEMAS; do
 	%gconf_schema_install $S
 done
 
 %preun
-SCHEMAS="banshee.schemas banshee-notificationareaicon.schemas audioscrobbler.schemas filesystemmonitor.schemas metadatasearch.schemas mmkeys.schemas"
+SCHEMAS="banshee.schemas banshee-notificationareaicon.schemas audioscrobbler.schemas daap.schemas metadatasearch.schemas mmkeys.schemas"
 for S in $SCHEMAS; do
 	%gconf_schema_install $S
 done
@@ -98,7 +107,7 @@ umask 022
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS README 
-%{_sysconfdir}/gconf/schemas/filesystemmonitor.schemas
+%{_sysconfdir}/gconf/schemas/daap.schemas
 %{_sysconfdir}/gconf/schemas/metadatasearch.schemas
 %{_sysconfdir}/gconf/schemas/banshee.schemas
 %{_sysconfdir}/gconf/schemas/banshee-notificationareaicon.schemas
@@ -108,7 +117,6 @@ umask 022
 %{_pkgconfigdir}/banshee.pc
 %dir %{_libdir}/banshee
 %{_libdir}/banshee/*.dll
-#%{_libdir}/banshee/*.a
 %attr(755,root,root) %{_libdir}/banshee/*.so
 %{_libdir}/banshee/*.exe
 %{_libdir}/banshee/*.mdb
