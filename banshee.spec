@@ -5,7 +5,7 @@
 #
 
 Summary:	A Mono/GStreamer Based Music Player
-Summary(pl.UTF-8):   Oparty na Mono/GStreamerze odtwarzacz muzyki
+Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name: 		banshee
 Version: 	0.11.0
 Release: 	0.1
