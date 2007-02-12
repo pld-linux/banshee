@@ -5,7 +5,7 @@
 #
 
 Summary:	A Mono/GStreamer Based Music Player
-Summary(pl):	Oparty na Mono/GStreamerze odtwarzacz muzyki
+Summary(pl.UTF-8):   Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name: 		banshee
 Version: 	0.11.0
 Release: 	0.1
@@ -48,9 +48,9 @@ Banshee is a brand spankin' new audio player based on the GStreamer
 media library and is developed on the Open Source Mono .NET Platform,
 written in C#.
 
-%description -l pl
-Banshee to nowy odtwarzacz d¼wiêku oparty na bibliotece odtwarzacza
-multimediów GStreamer, rozwijany na platformie .NET Mono, napisany w
+%description -l pl.UTF-8
+Banshee to nowy odtwarzacz dÅºwiÄ™ku oparty na bibliotece odtwarzacza
+multimediÃ³w GStreamer, rozwijany na platformie .NET Mono, napisany w
 C#.
 
 %prep
