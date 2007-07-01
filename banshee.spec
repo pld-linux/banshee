@@ -6,24 +6,22 @@
 
 Summary:	A Mono/GStreamer Based Music Player
 Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
-Name: 		banshee
-Version: 	0.11.0
-Release: 	0.1
-License: 	GPL
+Name:		banshee
+Version:	0.12.1
+Release:	0.1
+License:	GPL
 Group:		Applications/Multimedia
-Source0: 	http://banshee-project.org/files/banshee/%{name}-%{version}.tar.gz
-# Source0-md5:	f54e1d87a2bf2f239f1420eeba9d15eb
-Patch0:		%{name}-dbus.patch
-URL: 		http://banshee-project.org/
+Source0:	http://banshee-project.org/files/banshee/%{name}-%{version}.tar.gz
+# Source0-md5:	6bcfe0a4ca92e6cce86244938f004b8c
+URL:		http://banshee-project.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.13
 BuildRequires:	automake
 BuildRequires:	dbus-devel >= 0.93
 BuildRequires:	dbus-glib-devel >= 0.71
 BuildRequires:	dotnet-avahi-devel
-BuildRequires:	dotnet-dbus-sharp-devel >= 0.63
-BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
+BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
 BuildRequires:	gnome-desktop-devel >= 2.16.0
 BuildRequires:	gstreamer-cdparanoia
 BuildRequires:	gstreamer-devel >= 0.10.3
@@ -55,10 +53,9 @@ C#.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
-%{__aclocal}
+%{__aclocal} -I build/m4/banshee -I build/m4/shamrock
 %{__libtoolize}
 %{__automake}
 %{__autoconf}
@@ -91,34 +88,27 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/*.{la,a}
 rm -rf $RPM_BUILD_ROOT
 
 %post
-umask 022
-[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
-SCHEMAS="banshee.schemas banshee-notificationareaicon.schemas audioscrobbler.schemas daap.schemas metadatasearch.schemas mmkeys.schemas"
+%update_desktop_database_post
+SCHEMAS="banshee-core.schemas banshee-interface.schemas banshee-plugin-audioscrobbler.schemas banshee-plugin-daap.schemas banshee-plugin-metadatasearcher.schemas banshee-plugin-minimode.schemas banshee-plugin-mmkeys.schemas banshee-plugin-notificationarea.schemas banshee-plugin-podcast.schemas banshee-plugin-radio.schemas banshee-plugin-recommendation.schemas"
 for S in $SCHEMAS; do
 	%gconf_schema_install $S
 done
 
 %preun
-SCHEMAS="banshee.schemas banshee-notificationareaicon.schemas audioscrobbler.schemas daap.schemas metadatasearch.schemas mmkeys.schemas"
+SCHEMAS="banshee-core.schemas banshee-interface.schemas banshee-plugin-audioscrobbler.schemas banshee-plugin-daap.schemas banshee-plugin-metadatasearcher.schemas banshee-plugin-minimode.schemas banshee-plugin-mmkeys.schemas banshee-plugin-notificationarea.schemas banshee-plugin-podcast.schemas banshee-plugin-radio.schemas banshee-plugin-recommendation.schemas"
 for S in $SCHEMAS; do
 	%gconf_schema_install $S
 done
 
 %postun
-umask 022
-[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
+%update_desktop_database_postun
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog NEWS README 
-%{_sysconfdir}/gconf/schemas/daap.schemas
-%{_sysconfdir}/gconf/schemas/metadatasearch.schemas
-%{_sysconfdir}/gconf/schemas/banshee.schemas
-%{_sysconfdir}/gconf/schemas/banshee-notificationareaicon.schemas
-%{_sysconfdir}/gconf/schemas/audioscrobbler.schemas
-%{_sysconfdir}/gconf/schemas/mmkeys.schemas
+%doc AUTHORS COPYING ChangeLog NEWS README
+%{_sysconfdir}/gconf/schemas/*.schemas
 %attr(755,root,root) %{_bindir}/banshee
-%attr(755,root,root) %{_bindir}/banshee-import
+%{_datadir}/banshee
 %{_pkgconfigdir}/banshee.pc
 %dir %{_libdir}/banshee
 %{_libdir}/banshee/*.dll
