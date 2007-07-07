@@ -1,6 +1,3 @@
-# ToDo:
-#	- make some proper bconds for other it
-#
 %include /usr/lib/rpm/macros.mono
 #
 
@@ -8,7 +5,7 @@ Summary:	A Mono/GStreamer Based Music Player
 Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name:		banshee
 Version:	0.12.1
-Release:	0.3
+Release:	1
 License:	GPL
 Group:		Applications/Multimedia
 Source0:	http://banshee-project.org/files/banshee/%{name}-%{version}.tar.gz
@@ -98,6 +95,7 @@ SCHEMAS="banshee-core.schemas banshee-interface.schemas banshee-plugin-audioscro
 for S in $SCHEMAS; do
 	%gconf_schema_install $S
 done
+%update_icon_cache hicolor
 
 %preun
 SCHEMAS="banshee-core.schemas banshee-interface.schemas banshee-plugin-audioscrobbler.schemas banshee-plugin-daap.schemas banshee-plugin-metadatasearcher.schemas banshee-plugin-minimode.schemas banshee-plugin-mmkeys.schemas banshee-plugin-notificationarea.schemas banshee-plugin-podcast.schemas banshee-plugin-radio.schemas banshee-plugin-recommendation.schemas"
@@ -107,6 +105,7 @@ done
 
 %postun
 %update_desktop_database_postun
+%update_icon_cache hicolor
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
