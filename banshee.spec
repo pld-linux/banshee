@@ -24,6 +24,8 @@ BuildRequires:	dotnet-avahi-devel
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
 BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
 BuildRequires:	dotnet-ipod-sharp
+BuildRequires:	dotnet-libgphoto2-sharp-devel
+BuildRequires:	dotnet-njb-sharp
 BuildRequires:	gnome-desktop-devel >= 2.16.0
 BuildRequires:	gstreamer-cdparanoia
 BuildRequires:	gstreamer-devel >= 0.10.3
@@ -66,7 +68,7 @@ C#.
 	--disable-dev-tests \
 	--disable-helix \
 	--enable-ipod \
-	--disable-njb \
+	--enable-njb \
 	--disable-vlc \
 	--enable-gstreamer \
 	--enable-avahi \
