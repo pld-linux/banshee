@@ -8,7 +8,7 @@ Summary:	A Mono/GStreamer Based Music Player
 Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name:		banshee
 Version:	0.12.1
-Release:	0.2
+Release:	0.3
 License:	GPL
 Group:		Applications/Multimedia
 Source0:	http://banshee-project.org/files/banshee/%{name}-%{version}.tar.gz
@@ -23,6 +23,7 @@ BuildRequires:	dbus-glib-devel >= 0.71
 BuildRequires:	dotnet-avahi-devel
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
 BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
+BuildRequires:	dotnet-ipod-sharp
 BuildRequires:	gnome-desktop-devel >= 2.16.0
 BuildRequires:	gstreamer-cdparanoia
 BuildRequires:	gstreamer-devel >= 0.10.3
@@ -64,7 +65,7 @@ C#.
 %configure \
 	--disable-dev-tests \
 	--disable-helix \
-	--disable-ipod \
+	--enable-ipod \
 	--disable-njb \
 	--disable-vlc \
 	--enable-gstreamer \
