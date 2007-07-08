@@ -100,7 +100,7 @@ done
 %preun
 SCHEMAS="banshee-core.schemas banshee-interface.schemas banshee-plugin-audioscrobbler.schemas banshee-plugin-daap.schemas banshee-plugin-metadatasearcher.schemas banshee-plugin-minimode.schemas banshee-plugin-mmkeys.schemas banshee-plugin-notificationarea.schemas banshee-plugin-podcast.schemas banshee-plugin-radio.schemas banshee-plugin-recommendation.schemas"
 for S in $SCHEMAS; do
-	%gconf_schema_install $S
+	%gconf_schema_uninstall $S
 done
 
 %postun
