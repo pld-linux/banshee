@@ -38,7 +38,7 @@ BuildRequires:	monodoc
 BuildRequires:	nautilus-cd-burner-devel >= 2.16.0
 BuildRequires:	pkgconfig
 BuildRequires:	sqlite3-devel
-Obsoletes:	banshee-official-plugins <= 0.11.0
+Obsoletes:	banshee-official-plugins <= 0.11.3
 Requires:	gstreamer-cdparanoia >= 0.10.3
 Requires:	gstreamer-gnomevfs >= 0.10.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
