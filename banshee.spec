@@ -19,7 +19,7 @@ BuildRequires:	dbus-glib-devel >= 0.71
 BuildRequires:	dotnet-avahi-devel
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
 BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
-BuildRequires:	dotnet-ipod-sharp
+BuildRequires:	dotnet-ipod-sharp >= 0.6.3
 BuildRequires:	dotnet-libgphoto2-sharp-devel
 BuildRequires:	dotnet-njb-sharp
 BuildRequires:	gnome-desktop-devel >= 2.16.0
@@ -38,7 +38,7 @@ BuildRequires:	monodoc
 BuildRequires:	nautilus-cd-burner-devel >= 2.16.0
 BuildRequires:	pkgconfig
 BuildRequires:	sqlite3-devel
-Obsoletes:	banshee-official-plugins <= 0.11
+Obsoletes:	banshee-official-plugins <= 0.11.0
 Requires:	gstreamer-cdparanoia >= 0.10.3
 Requires:	gstreamer-gnomevfs >= 0.10.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
