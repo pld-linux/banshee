@@ -40,6 +40,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	sqlite3-devel
 Obsoletes:	banshee-official-plugins <= 0.11.3
 Requires:	gstreamer-cdparanoia >= 0.10.3
+Requires:	gstreamer-GConf >= 0.10.3
 Requires:	gstreamer-gnomevfs >= 0.10.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
