@@ -20,15 +20,15 @@ BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
 BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
 BuildRequires:	dotnet-ipod-sharp >= 0.8.0
 BuildRequires:	dotnet-libgphoto2-sharp-devel
-BuildRequires:	dotnet-mono-zeroconf
+BuildRequires:	dotnet-mono-zeroconf-devel
 BuildRequires:	dotnet-njb-sharp
 BuildRequires:	gnome-desktop-devel >= 2.16.0
+BuildRequires:	gstreamer-GConf >= 0.10.3
 BuildRequires:	gstreamer-cdparanoia
 BuildRequires:	gstreamer-devel >= 0.10.3
 BuildRequires:	gstreamer-gnomevfs
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.3
-BuildRequires:	gstreamer-GConf >= 0.10.3
-BuildRequires:	gtk+2-devel >= 2.10.3
+BuildRequires:	gtk+2-devel >= 2:2.10.3
 BuildRequires:	hal-devel >= 0.5.2
 BuildRequires:	intltool >= 0.35
 BuildRequires:	libmusicbrainz-devel >= 2.1.1
@@ -38,10 +38,10 @@ BuildRequires:	monodoc
 BuildRequires:	nautilus-cd-burner-devel >= 2.16.0
 BuildRequires:	pkgconfig
 BuildRequires:	sqlite3-devel
-Obsoletes:	banshee-official-plugins <= 0.11.3
 Requires:	gstreamer-cdparanoia >= 0.10.3
 Requires:	gstreamer-GConf >= 0.10.3
 Requires:	gstreamer-gnomevfs >= 0.10.3
+Obsoletes:	banshee-official-plugins <= 0.11.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
