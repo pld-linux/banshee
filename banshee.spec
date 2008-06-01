@@ -4,12 +4,12 @@
 Summary:	A Mono/GStreamer Based Music Player
 Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name:		banshee
-Version:	0.13.2
-Release:	3
+Version:	0.99.3
+Release:	1
 License:	GPL
 Group:		Applications/Multimedia
-Source0:	http://banshee-project.org/files/banshee/%{name}-%{version}.tar.gz
-# Source0-md5:	e75b322963c7ec1a40f59421a30764ef
+Source0:	http://banshee-project.org/files/banshee/%{name}-1-%{version}.tar.gz
+# Source0-md5:	db148cf72cf2acc684de7207316f299f
 URL:		http://banshee-project.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.13
@@ -31,15 +31,18 @@ BuildRequires:	gstreamer-plugins-base-devel >= 0.10.3
 BuildRequires:	gtk+2-devel >= 2:2.10.3
 BuildRequires:	hal-devel >= 0.5.2
 BuildRequires:	intltool >= 0.35
+BuildRequires:	libmtp-devel >= 0.2.0
 BuildRequires:	libmusicbrainz-devel >= 2.1.1
 BuildRequires:	libtool
+BuildRequires:	mono-addins-devel >= 0.3
 BuildRequires:	mono-csharp >= 1.1.13
 BuildRequires:	monodoc
 BuildRequires:	nautilus-cd-burner-devel >= 2.16.0
 BuildRequires:	pkgconfig
 BuildRequires:	sqlite3-devel
-Requires:	gstreamer-cdparanoia >= 0.10.3
+BuildRequires:	taglib-sharp-devel
 Requires:	gstreamer-GConf >= 0.10.3
+Requires:	gstreamer-cdparanoia >= 0.10.3
 Requires:	gstreamer-gnomevfs >= 0.10.3
 Obsoletes:	banshee-official-plugins <= 0.11.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -55,7 +58,7 @@ multimediów GStreamer, rozwijany na platformie .NET Mono, napisany w
 C#.
 
 %prep
-%setup -q
+%setup -q -n %{name}-1-%{version}
 
 %build
 %{__intltoolize}
@@ -71,7 +74,6 @@ C#.
 	--disable-vlc \
 	--enable-gstreamer \
 	--enable-avahi \
-	--disable-schemas-install \
 	--disable-docs
 %{__make}
 
@@ -86,46 +88,42 @@ install -d $RPM_BUILD_ROOT%{_libdir}/monodoc/sources
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/*.{la,a}
 
-%find_lang %{name}
+%find_lang %{name}-1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
 %update_desktop_database_post
-SCHEMAS="banshee-core.schemas banshee-interface.schemas banshee-plugin-audioscrobbler.schemas banshee-plugin-daap.schemas banshee-plugin-metadatasearcher.schemas banshee-plugin-minimode.schemas banshee-plugin-mmkeys.schemas banshee-plugin-notificationarea.schemas banshee-plugin-podcast.schemas banshee-plugin-radio.schemas banshee-plugin-recommendation.schemas"
-for S in $SCHEMAS; do
-	%gconf_schema_install $S
-done
 %update_icon_cache hicolor
-
-%preun
-SCHEMAS="banshee-core.schemas banshee-interface.schemas banshee-plugin-audioscrobbler.schemas banshee-plugin-daap.schemas banshee-plugin-metadatasearcher.schemas banshee-plugin-minimode.schemas banshee-plugin-mmkeys.schemas banshee-plugin-notificationarea.schemas banshee-plugin-podcast.schemas banshee-plugin-radio.schemas banshee-plugin-recommendation.schemas"
-for S in $SCHEMAS; do
-	%gconf_schema_uninstall $S
-done
 
 %postun
 %update_desktop_database_postun
 %update_icon_cache hicolor
 
-%files -f %{name}.lang
+%files -f %{name}-1.lang
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS README
-%{_sysconfdir}/gconf/schemas/*.schemas
-%attr(755,root,root) %{_bindir}/banshee
-%{_datadir}/banshee
-%{_pkgconfigdir}/banshee.pc
-%dir %{_libdir}/banshee
-%{_libdir}/banshee/*.dll
-%attr(755,root,root) %{_libdir}/banshee/*.so
-%{_libdir}/banshee/*.exe
-%{_libdir}/banshee/*.mdb
-%{_libdir}/banshee/*.config
-%{_libdir}/banshee/Banshee.Dap
-%{_libdir}/banshee/Banshee.MediaEngine
-%{_libdir}/banshee/Banshee.Plugins
+%attr(755,root,root) %{_bindir}/banshee-1
+%{_datadir}/banshee-1
+%{_pkgconfigdir}/banshee-1*.pc
+%dir %{_libdir}/banshee-1
+%{_libdir}/banshee-1/*.dll
+%attr(755,root,root) %{_libdir}/banshee-1/*.so
+%{_libdir}/banshee-1/*.exe
+%{_libdir}/banshee-1/*.mdb
+%{_libdir}/banshee-1/*.config
+%dir %{_libdir}/banshee-1/Extensions
+%{_libdir}/banshee-1/Extensions/*.dll
+%{_libdir}/banshee-1/Extensions/*.mdb
+%dir %{_libdir}/banshee-1/Backends
+%{_libdir}/banshee-1/Backends/*.dll
+%{_libdir}/banshee-1/Backends/*.mdb
+%{_libdir}/banshee-1/Banshee.Services.addins
+%{_libdir}/banshee-1/Extensions/Banshee.NotificationArea.dll.config
+#%{_libdir}/banshee-1/libbanshee.a
+#%{_libdir}/banshee-1/libbanshee.la
 #%{_libdir}/monodoc/sources/*
-%{_desktopdir}/banshee.desktop
+%{_desktopdir}/banshee-1.desktop
 %{_iconsdir}/hicolor/*/*/*
-%{_datadir}/dbus-1/services/org.gnome.Banshee.service
+%{_datadir}/dbus-1/services/org.bansheeproject.Banshee.service
