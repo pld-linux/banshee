@@ -4,12 +4,12 @@
 Summary:	A Mono/GStreamer Based Music Player
 Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name:		banshee
-Version:	1.0.0
+Version:	1.2.0
 Release:	1
 License:	GPL
 Group:		Applications/Multimedia
 Source0:	http://download.banshee-project.org/banshee/%{name}-1-%{version}.tar.bz2
-# Source0-md5:	a0119f571701ecbede5f1e4c011e7685
+# Source0-md5:	1f651fa626b188adba35bcdac5d7f686
 URL:		http://banshee-project.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.13
@@ -67,6 +67,7 @@ C#.
 %{__automake}
 %{__autoconf}
 %configure \
+	--disable-boo \
 	--disable-dev-tests \
 	--disable-helix \
 	--enable-ipod \
@@ -116,11 +117,14 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/banshee-1/Extensions
 %{_libdir}/banshee-1/Extensions/*.dll
 %{_libdir}/banshee-1/Extensions/*.mdb
+%{_libdir}/banshee-1/Extensions/Banshee.NotificationArea.dll.config
 %dir %{_libdir}/banshee-1/Backends
 %{_libdir}/banshee-1/Backends/*.dll
 %{_libdir}/banshee-1/Backends/*.mdb
+%{_libdir}/banshee-1/Backends/*.so
 %{_libdir}/banshee-1/Banshee.Services.addins
-%{_libdir}/banshee-1/Extensions/Banshee.NotificationArea.dll.config
+%dir %{_libdir}/banshee-1/gstreamer-0.10
+%{_libdir}/banshee-1/gstreamer-0.10/*.so
 #%{_libdir}/banshee-1/libbanshee.a
 #%{_libdir}/banshee-1/libbanshee.la
 #%{_libdir}/monodoc/sources/*
