@@ -18,7 +18,7 @@ BuildRequires:	dbus-devel >= 0.93
 BuildRequires:	dbus-glib-devel >= 0.71
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
 BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
-BuildRequires:	dotnet-ipod-sharp >= 0.8.0
+BuildRequires:	dotnet-ipod-sharp-devel >= 0.8.0
 BuildRequires:	dotnet-libgphoto2-sharp-devel
 BuildRequires:	dotnet-mono-zeroconf-devel
 BuildRequires:	dotnet-njb-sharp
