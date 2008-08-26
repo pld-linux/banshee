@@ -41,6 +41,7 @@ BuildRequires:	nautilus-cd-burner-devel >= 2.16.0
 BuildRequires:	pkgconfig
 BuildRequires:	sqlite3-devel
 BuildRequires:	taglib-sharp-devel
+Requires:	dotnet-ipod-sharp >= 0.8.0
 Requires:	gstreamer-GConf >= 0.10.3
 Requires:	gstreamer-cdparanoia >= 0.10.3
 Requires:	gstreamer-gnomevfs >= 0.10.3
