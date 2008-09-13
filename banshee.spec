@@ -5,7 +5,7 @@ Summary:	A Mono/GStreamer Based Music Player
 Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name:		banshee
 Version:	1.2.1
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/Multimedia
 Source0:	http://download.banshee-project.org/banshee/%{name}-1-%{version}.tar.bz2
@@ -34,7 +34,7 @@ BuildRequires:	intltool >= 0.35
 BuildRequires:	libmtp-devel >= 0.2.0
 BuildRequires:	libmusicbrainz-devel >= 2.1.1
 BuildRequires:	libtool
-BuildRequires:	mono-addins-devel >= 0.3
+BuildRequires:	mono-addins-devel >= 0.3.1-2
 BuildRequires:	mono-csharp >= 1.1.13
 BuildRequires:	monodoc
 BuildRequires:	nautilus-cd-burner-devel >= 2.16.0
