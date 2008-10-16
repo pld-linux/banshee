@@ -1,11 +1,11 @@
+#
 %include /usr/lib/rpm/macros.mono
 #
-
 Summary:	A Mono/GStreamer Based Music Player
 Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name:		banshee
 Version:	1.2.1
-Release:	3
+Release:	4
 License:	GPL
 Group:		Applications/Multimedia
 Source0:	http://download.banshee-project.org/banshee/%{name}-1-%{version}.tar.bz2
