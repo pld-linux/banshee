@@ -33,6 +33,7 @@ BuildRequires:	hal-devel >= 0.5.2
 BuildRequires:	intltool >= 0.35
 BuildRequires:	libmtp-devel >= 0.2.0
 BuildRequires:	libmusicbrainz-devel >= 2.1.1
+BuildRequires:	libtool
 BuildRequires:	mono-addins-devel >= 0.3.1-2
 BuildRequires:	mono-csharp >= 1.1.13
 BuildRequires:	monodoc
