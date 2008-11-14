@@ -5,13 +5,15 @@ Summary:	A Mono/GStreamer Based Music Player
 Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name:		banshee
 Version:	1.4.1
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Multimedia
 Source0:	http://download.banshee-project.org/banshee/%{name}-1-%{version}.tar.bz2
 # Source0-md5:	cd245c2eb47c67f83e921f4edf105abe
 URL:		http://banshee-project.org/
 BuildRequires:	GConf2-devel
+BuildRequires:	autoconf >= 2.13
+BuildRequires:	automake
 BuildRequires:	dbus-devel >= 0.93
 BuildRequires:	dbus-glib-devel >= 0.71
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
@@ -59,8 +61,12 @@ C#.
 %setup -q -n %{name}-1-%{version}
 
 %build
+%{__libtoolize}
 %{__intltoolize}
 %{__aclocal} -I build/m4/banshee -I build/m4/shamrock
+%{__automake}
+%{__autoconf}
+
 %configure \
 	--disable-boo \
 	--disable-dev-tests \
