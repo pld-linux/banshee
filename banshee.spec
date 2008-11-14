@@ -4,21 +4,19 @@
 Summary:	A Mono/GStreamer Based Music Player
 Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name:		banshee
-Version:	1.2.1
-Release:	4
+Version:	1.4.0
+Release:	1
 License:	GPL
 Group:		Applications/Multimedia
 Source0:	http://download.banshee-project.org/banshee/%{name}-1-%{version}.tar.bz2
-# Source0-md5:	4537d105352b465049953f72da34d3d8
+# Source0-md5:	0779dba8e0608d19fa1f4424fc26a557
 URL:		http://banshee-project.org/
 BuildRequires:	GConf2-devel
-BuildRequires:	autoconf >= 2.13
-BuildRequires:	automake
 BuildRequires:	dbus-devel >= 0.93
 BuildRequires:	dbus-glib-devel >= 0.71
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
 BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
-BuildRequires:	dotnet-ipod-sharp-devel >= 0.8.0
+BuildRequires:	dotnet-ipod-sharp-devel >= 0.8.1
 BuildRequires:	dotnet-libgphoto2-sharp-devel
 BuildRequires:	dotnet-mono-zeroconf-devel
 BuildRequires:	dotnet-njb-sharp
@@ -33,7 +31,6 @@ BuildRequires:	hal-devel >= 0.5.2
 BuildRequires:	intltool >= 0.35
 BuildRequires:	libmtp-devel >= 0.2.0
 BuildRequires:	libmusicbrainz-devel >= 2.1.1
-BuildRequires:	libtool
 BuildRequires:	mono-addins-devel >= 0.3.1-2
 BuildRequires:	mono-csharp >= 1.1.13
 BuildRequires:	monodoc
@@ -64,9 +61,6 @@ C#.
 %build
 %{__intltoolize}
 %{__aclocal} -I build/m4/banshee -I build/m4/shamrock
-%{__libtoolize}
-%{__automake}
-%{__autoconf}
 %configure \
 	--disable-boo \
 	--disable-dev-tests \
@@ -88,7 +82,9 @@ install -d $RPM_BUILD_ROOT%{_libdir}/monodoc/sources
 
 #mv $RPM_BUILD_ROOT%{_docdir}/%{name}/* $RPM_BUILD_ROOT%{_libdir}/monodoc/sources
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/*.{la,a}
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}-1/*.{la,a}
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}-1/Backends/*.{la,a}
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}-1/gstreamer-0.10/*.{la,a}
 
 %find_lang %{name}-1
 
@@ -120,6 +116,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/banshee-1/Extensions/*.mdb
 %{_libdir}/banshee-1/Extensions/Banshee.NotificationArea.dll.config
 %dir %{_libdir}/banshee-1/Backends
+%{_libdir}/banshee-1/Backends/*.config
 %{_libdir}/banshee-1/Backends/*.dll
 %{_libdir}/banshee-1/Backends/*.mdb
 %{_libdir}/banshee-1/Backends/*.so
@@ -132,3 +129,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/banshee-1.desktop
 %{_iconsdir}/hicolor/*/*/*
 %{_datadir}/dbus-1/services/org.bansheeproject.Banshee.service
+%{_datadir}/dbus-1/services/org.bansheeproject.CollectionIndexer.service
