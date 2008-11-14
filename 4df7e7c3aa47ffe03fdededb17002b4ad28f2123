@@ -1,0 +1,5 @@
+- up to 1.4.0
+- %build: autoconf, automake, libtool dropped
+- %install: more cleaning
+- more verbose %files
+- BR: needs dotnet-ipod-sharp-devel >= 0.8.1
