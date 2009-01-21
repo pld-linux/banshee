@@ -4,12 +4,12 @@
 Summary:	A Mono/GStreamer Based Music Player
 Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name:		banshee
-Version:	1.4.1
-Release:	3
+Version:	1.4.2
+Release:	1
 License:	GPL
 Group:		Applications/Multimedia
 Source0:	http://download.banshee-project.org/banshee/%{name}-1-%{version}.tar.bz2
-# Source0-md5:	cd245c2eb47c67f83e921f4edf105abe
+# Source0-md5:	ddee6b6c66aabb2c5a91c753ad5de498
 URL:		http://banshee-project.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.13
@@ -77,7 +77,8 @@ C#.
 	--disable-vlc \
 	--enable-gstreamer \
 	--enable-avahi \
-	--disable-docs
+	--disable-docs \
+	--with-vendor-build-id="%{distribution}"
 %{__make}
 
 %install
@@ -133,6 +134,8 @@ rm -rf $RPM_BUILD_ROOT
 #%{_libdir}/banshee-1/libbanshee.a
 #%{_libdir}/banshee-1/libbanshee.la
 #%{_libdir}/monodoc/sources/*
+%{_desktopdir}/banshee-1-audiocd.desktop
+%{_desktopdir}/banshee-1-media-player.desktop
 %{_desktopdir}/banshee-1.desktop
 %{_iconsdir}/hicolor/*/*/*
 %{_datadir}/dbus-1/services/org.bansheeproject.Banshee.service
