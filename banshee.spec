@@ -5,7 +5,7 @@ Summary:	A Mono/GStreamer Based Music Player
 Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name:		banshee
 Version:	1.4.3
-Release:	3
+Release:	4
 License:	GPL
 Group:		Applications/Multimedia
 Source0:	http://download.banshee-project.org/banshee/%{name}-1-%{version}.tar.bz2
@@ -47,6 +47,7 @@ Requires:	dotnet-ipod-sharp >= 0.8.0
 Requires:	gstreamer-GConf >= 0.10.3
 Requires:	gstreamer-cdparanoia >= 0.10.3
 Requires:	gstreamer-gnomevfs >= 0.10.3
+Requires:	mono-addins >= 0.3.1-2
 Obsoletes:	banshee-official-plugins <= 0.11.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
