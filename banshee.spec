@@ -4,16 +4,18 @@
 Summary:	A Mono/GStreamer Based Music Player
 Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name:		banshee
-Version:	1.4.3
-Release:	4
+Version:	1.5.1
+Release:	1
 License:	GPL
 Group:		Applications/Multimedia
 Source0:	http://download.banshee-project.org/banshee/%{name}-1-%{version}.tar.bz2
-# Source0-md5:	880dee65d2bfe62be711a8edfe4d737f
+# Source0-md5:	b24051482dca8b87932db2a1e27ff43f
 URL:		http://banshee-project.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.13
 BuildRequires:	automake
+BuildRequires:	brasero-devel >= 2.28.0
+BuildRequires:	clutter-devel >= 1.0.1
 BuildRequires:	dbus-devel >= 0.93
 BuildRequires:	dbus-glib-devel >= 0.71
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
@@ -39,7 +41,6 @@ BuildRequires:	libtool
 BuildRequires:	mono-addins-devel >= 0.3.1-2
 BuildRequires:	mono-csharp >= 1.1.13
 BuildRequires:	monodoc
-BuildRequires:	nautilus-cd-burner-devel >= 2.16.0
 BuildRequires:	pkgconfig
 BuildRequires:	sqlite3-devel
 BuildRequires:	taglib-sharp-devel
@@ -67,7 +68,7 @@ C#.
 %build
 %{__libtoolize}
 %{__intltoolize}
-%{__aclocal} -I build/m4/banshee -I build/m4/shamrock
+%{__aclocal} -I build/m4/banshee -I build/m4/shave -I build/m4/shamrock
 %{__automake}
 %{__autoconf}
 
@@ -114,6 +115,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/banshee-1
+%attr(755,root,root) %{_bindir}/muinshee
 %{_datadir}/banshee-1
 %{_pkgconfigdir}/banshee-1*.pc
 %dir %{_libdir}/banshee-1
@@ -126,6 +128,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/banshee-1/Extensions/*.dll
 %{_libdir}/banshee-1/Extensions/*.mdb
 %{_libdir}/banshee-1/Extensions/Banshee.NotificationArea.dll.config
+%{_libdir}/banshee-1/Extensions/Banshee.NowPlaying.dll.config
 %dir %{_libdir}/banshee-1/Backends
 %{_libdir}/banshee-1/Backends/*.config
 %{_libdir}/banshee-1/Backends/*.dll
