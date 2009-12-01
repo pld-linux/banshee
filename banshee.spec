@@ -4,12 +4,12 @@
 Summary:	A Mono/GStreamer Based Music Player
 Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name:		banshee
-Version:	1.5.1
+Version:	1.5.2
 Release:	1
 License:	GPL
 Group:		Applications/Multimedia
 Source0:	http://download.banshee-project.org/banshee/%{name}-1-%{version}.tar.bz2
-# Source0-md5:	b24051482dca8b87932db2a1e27ff43f
+# Source0-md5:	679042321ac3e809a48304f084ce7cf9
 URL:		http://banshee-project.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.13
@@ -20,7 +20,7 @@ BuildRequires:	dbus-devel >= 0.93
 BuildRequires:	dbus-glib-devel >= 0.71
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
 BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
-BuildRequires:	dotnet-ipod-sharp-devel >= 0.8.1
+BuildRequires:	dotnet-ipod-sharp-devel >= 0.8.5
 BuildRequires:	dotnet-libgphoto2-sharp-devel
 BuildRequires:	dotnet-mono-zeroconf-devel
 BuildRequires:	dotnet-ndesk-dbus-glib-sharp-devel >= 0.3
@@ -128,7 +128,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/banshee-1/Extensions/*.dll
 %{_libdir}/banshee-1/Extensions/*.mdb
 %{_libdir}/banshee-1/Extensions/Banshee.NotificationArea.dll.config
-%{_libdir}/banshee-1/Extensions/Banshee.NowPlaying.dll.config
 %dir %{_libdir}/banshee-1/Backends
 %{_libdir}/banshee-1/Backends/*.config
 %{_libdir}/banshee-1/Backends/*.dll
