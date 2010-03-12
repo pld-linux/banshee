@@ -85,7 +85,8 @@ bash %configure \
 	--enable-avahi \
 	--disable-docs \
 	--with-vendor-build-id="%{distribution}"
-%{__make} -j 1
+%{__make} \
+	SHELL=/bin/bash
 
 %install
 rm -rf $RPM_BUILD_ROOT
