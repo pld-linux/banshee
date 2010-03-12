@@ -33,7 +33,7 @@ BuildRequires:	gstreamer-GConf >= 0.10.3
 BuildRequires:	gstreamer-cdparanoia
 BuildRequires:	gstreamer-devel >= 0.10.3
 BuildRequires:	gstreamer-gnomevfs
-BuildRequires:	gstreamer-plugins-base-devel >= 0.10.3
+BuildRequires:	gstreamer-plugins-base-devel >= 0.10.25.2
 BuildRequires:	gtk+2-devel >= 2:2.10.3
 BuildRequires:	hal-devel >= 0.5.2
 BuildRequires:	intltool >= 0.35
