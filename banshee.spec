@@ -4,12 +4,12 @@
 Summary:	A Mono/GStreamer Based Music Player
 Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name:		banshee
-Version:	1.5.3
+Version:	1.5.5
 Release:	1
 License:	GPL
 Group:		Applications/Multimedia
 Source0:	http://download.banshee-project.org/banshee/%{name}-1-%{version}.tar.bz2
-# Source0-md5:	953124a1be0e9299f092dbf2f9742376
+# Source0-md5:	0f5f2ba887cd57b2f785320ab0a44911
 URL:		http://banshee-project.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.13
@@ -18,6 +18,7 @@ BuildRequires:	brasero-devel >= 2.28.0
 BuildRequires:	clutter-devel >= 1.0.1
 BuildRequires:	dbus-devel >= 0.93
 BuildRequires:	dbus-glib-devel >= 0.71
+BuildRequires:	dotnet-gdata-sharp-devel
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
 BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
 BuildRequires:	dotnet-ipod-sharp-devel >= 0.8.5
@@ -26,6 +27,7 @@ BuildRequires:	dotnet-mono-zeroconf-devel
 BuildRequires:	dotnet-ndesk-dbus-glib-sharp-devel >= 0.3
 BuildRequires:	dotnet-njb-sharp
 BuildRequires:	dotnet-notify-sharp-devel
+BuildRequires:	dotnet-webkit-sharp-devel
 BuildRequires:	gnome-desktop-devel >= 2.16.0
 BuildRequires:	gstreamer-GConf >= 0.10.3
 BuildRequires:	gstreamer-cdparanoia
@@ -43,7 +45,7 @@ BuildRequires:	mono-csharp >= 1.1.13
 BuildRequires:	monodoc
 BuildRequires:	pkgconfig
 BuildRequires:	sqlite3-devel
-BuildRequires:	taglib-sharp-devel
+BuildRequires:	taglib-sharp-devel >= 2.0.3.5
 Requires:	dotnet-ipod-sharp >= 0.8.0
 Requires:	gstreamer-GConf >= 0.10.3
 Requires:	gstreamer-cdparanoia >= 0.10.3
