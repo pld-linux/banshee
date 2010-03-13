@@ -28,6 +28,7 @@ BuildRequires:	dotnet-ndesk-dbus-glib-sharp-devel >= 0.3
 BuildRequires:	dotnet-njb-sharp
 BuildRequires:	dotnet-notify-sharp-devel
 BuildRequires:	dotnet-webkit-sharp-devel
+BuildRequires:	gettext-devel
 BuildRequires:	gnome-desktop-devel >= 2.16.0
 BuildRequires:	gstreamer-GConf >= 0.10.3
 BuildRequires:	gstreamer-cdparanoia
