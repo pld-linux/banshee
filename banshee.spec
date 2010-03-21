@@ -4,50 +4,50 @@
 Summary:	A Mono/GStreamer Based Music Player
 Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name:		banshee
-Version:	1.5.5
-Release:	2
+Version:	1.5.6
+Release:	1
 License:	GPL
-Group:		Applications/Multimedia
+Group:		X11/Applications/Multimedia
 Source0:	http://download.banshee-project.org/banshee/%{name}-1-%{version}.tar.bz2
-# Source0-md5:	0f5f2ba887cd57b2f785320ab0a44911
+# Source0-md5:	54ab347092009e3da2afe97ec22bf60a
 URL:		http://banshee-project.org/
 BuildRequires:	GConf2-devel
-BuildRequires:	autoconf >= 2.13
-BuildRequires:	automake
+BuildRequires:	autoconf >= 2.52
+BuildRequires:	automake >= 1:1.9
 BuildRequires:	brasero-devel >= 2.28.0
 BuildRequires:	clutter-devel >= 1.0.1
 BuildRequires:	dbus-devel >= 0.93
 BuildRequires:	dbus-glib-devel >= 0.71
 BuildRequires:	dotnet-gdata-sharp-devel
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
-BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
+BuildRequires:	dotnet-gtk-sharp2-devel >= 2.12.0
 BuildRequires:	dotnet-ipod-sharp-devel >= 0.8.5
 BuildRequires:	dotnet-libgphoto2-sharp-devel
-BuildRequires:	dotnet-mono-zeroconf-devel
+BuildRequires:	dotnet-mono-zeroconf-devel >= 0.7.3
 BuildRequires:	dotnet-ndesk-dbus-glib-sharp-devel >= 0.3
 BuildRequires:	dotnet-njb-sharp
 BuildRequires:	dotnet-notify-sharp-devel
+BuildRequires:	dotnet-taglib-sharp-devel >= 2.0.3.7
 BuildRequires:	dotnet-webkit-sharp-devel
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-desktop-devel >= 2.16.0
 BuildRequires:	gstreamer-GConf >= 0.10.3
 BuildRequires:	gstreamer-cdparanoia
-BuildRequires:	gstreamer-devel >= 0.10.3
+BuildRequires:	gstreamer-devel >= 0.10.12
 BuildRequires:	gstreamer-gnomevfs
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.25.2
 BuildRequires:	gtk+2-devel >= 2:2.10.3
 BuildRequires:	hal-devel >= 0.5.2
-BuildRequires:	intltool >= 0.35
+BuildRequires:	intltool >= 0.35.0
 BuildRequires:	libmtp-devel >= 0.2.0
 BuildRequires:	libmusicbrainz-devel >= 2.1.1
 BuildRequires:	libtool
 BuildRequires:	mono-addins-devel >= 0.3.1-2
-BuildRequires:	mono-csharp >= 1.1.13
+BuildRequires:	mono-csharp >= 2.4.3
 BuildRequires:	monodoc
 BuildRequires:	pkgconfig
-BuildRequires:	sqlite3-devel
-BuildRequires:	taglib-sharp-devel >= 2.0.3.5
-Requires:	dotnet-ipod-sharp >= 0.8.0
+BuildRequires:	sqlite3-devel >= 3.4.0
+Requires:	dotnet-ipod-sharp >= 0.8.5
 Requires:	gstreamer-GConf >= 0.10.3
 Requires:	gstreamer-cdparanoia >= 0.10.3
 Requires:	gstreamer-gnomevfs >= 0.10.3
@@ -77,13 +77,7 @@ C#.
 
 bash %configure \
 	--disable-boo \
-	--disable-dev-tests \
-	--disable-helix \
 	--enable-ipod \
-	--enable-njb \
-	--disable-vlc \
-	--enable-gstreamer \
-	--enable-avahi \
 	--disable-docs \
 	--with-vendor-build-id="%{distribution}"
 %{__make} -j1 \
