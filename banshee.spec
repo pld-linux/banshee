@@ -4,28 +4,29 @@
 Summary:	A Mono/GStreamer Based Music Player
 Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name:		banshee
-Version:	2.0.1
+Version:	2.2.0
 Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://download.banshee-project.org/banshee/stable/2.0.1/%{name}-%{version}.tar.bz2
-# Source0-md5:	83d77447936eed84eba2123b341b62ea
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/banshee/2.2/%{name}-%{version}.tar.xz
+# Source0-md5:	096813269a190011a345fa8aae15c3f4
 URL:		http://banshee.fm/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1:1.9
-BuildRequires:	clutter-devel >= 1.0.1
+BuildRequires:	clutter-devel >= 1.2.0
+BuildRequires:	dotnet-dbus-sharp-devel >= 0.7
+BuildRequires:	dotnet-dbus-sharp-glib-devel >= 0.5
 BuildRequires:	dotnet-gdata-sharp-devel >= 1.5.0
-BuildRequires:	dotnet-gio-sharp-devel >= 0.2
+BuildRequires:	dotnet-gio-sharp-devel >= 0.3
 BuildRequires:	dotnet-gkeyfile-sharp-devel >= 0.1
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
+BuildRequires:	dotnet-gstreamer-sharp-devel
 BuildRequires:	dotnet-gtk-sharp-beans-devel >= 2.8
 BuildRequires:	dotnet-gtk-sharp2-devel >= 2.12.10
 BuildRequires:	dotnet-gudev-sharp-devel >= 0.1
-BuildRequires:	dotnet-ipod-sharp-devel >= 0.8.5
 BuildRequires:	dotnet-libgpod-sharp-devel >= 0.8.0
 BuildRequires:	dotnet-mono-zeroconf-devel >= 0.8.0
-BuildRequires:	dotnet-ndesk-dbus-glib-sharp-devel >= 0.3
 BuildRequires:	dotnet-notify-sharp-devel
 BuildRequires:	dotnet-taglib-sharp-devel >= 2.0.3.7
 BuildRequires:	gettext-devel
@@ -46,12 +47,13 @@ BuildRequires:	monodoc
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	sqlite3-devel >= 3.4.0
+BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libXrandr-devel >= 1.1.1
 BuildRequires:	xorg-lib-libXxf86vm-devel >= 1.0.1
+BuildRequires:	xz
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	shared-mime-info
-Requires:	dotnet-ipod-sharp >= 0.8.5
 Requires:	gstreamer-GConf >= 0.10.3
 Requires:	gstreamer-cdparanoia >= 0.10.3
 Requires:	hicolor-icon-theme
@@ -82,8 +84,6 @@ C#.
 
 %configure \
 	--disable-boo \
-	--disable-hal \
-	--enable-ipod \
 	--disable-docs \
 	--disable-shave \
 	--with-vendor-build-id="%{distribution}"
@@ -97,7 +97,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/*.{la,a}
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/Backends/*.{la,a}
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/gstreamer-0.10/*.{la,a}
 
 %find_lang %{name} --with-gnome --all-name
 
@@ -140,8 +139,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/banshee/Backends/*.mdb
 %{_libdir}/banshee/Backends/*.so
 %{_libdir}/banshee/Banshee.Services.addins
-%dir %{_libdir}/banshee/gstreamer-0.10
-%{_libdir}/banshee/gstreamer-0.10/*.so
 %{_desktopdir}/banshee-audiocd.desktop
 %{_desktopdir}/banshee-media-player.desktop
 %{_desktopdir}/banshee.desktop
@@ -149,3 +146,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/services/org.bansheeproject.Banshee.service
 %{_datadir}/dbus-1/services/org.bansheeproject.CollectionIndexer.service
 %{_datadir}/mime/packages/banshee-amz.xml
+%{_datadir}/mime/packages/banshee-emx.xml
