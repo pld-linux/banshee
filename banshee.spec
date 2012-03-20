@@ -4,12 +4,12 @@
 Summary:	A Mono/GStreamer Based Music Player
 Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name:		banshee
-Version:	2.2.1
+Version:	2.4.0
 Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/banshee/2.2/%{name}-%{version}.tar.xz
-# Source0-md5:	d682f5c1f64a183123562ad1d6c58b5c
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/banshee/2.4/%{name}-%{version}.tar.xz
+# Source0-md5:	a719717d02ed26cccf4e6432edd48a31
 URL:		http://banshee.fm/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.52
@@ -25,7 +25,9 @@ BuildRequires:	dotnet-gstreamer-sharp-devel
 BuildRequires:	dotnet-gtk-sharp-beans-devel >= 2.8
 BuildRequires:	dotnet-gtk-sharp2-devel >= 2.12.10
 BuildRequires:	dotnet-gudev-sharp-devel >= 0.1
+BuildRequires:	dotnet-karma-sharp-devel >= 0.0.5
 BuildRequires:	dotnet-libgpod-sharp-devel >= 0.8.0
+BuildRequires:	dotnet-mono-upnp-devel >= 0.1
 BuildRequires:	dotnet-mono-zeroconf-devel >= 0.8.0
 BuildRequires:	dotnet-notify-sharp-devel
 BuildRequires:	dotnet-taglib-sharp-devel >= 2.0.3.7
@@ -33,7 +35,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.22.0
 BuildRequires:	gnome-desktop2-devel
 BuildRequires:	gnome-doc-utils >= 0.18.0
-BuildRequires:	gstreamer-devel >= 0.10.23
+BuildRequires:	gstreamer-devel >= 0.10.26
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.26
 BuildRequires:	gtk+2-devel >= 2:2.22.0
 BuildRequires:	gtk-webkit-devel >= 1.2.2
@@ -41,7 +43,7 @@ BuildRequires:	intltool >= 0.35.0
 BuildRequires:	libmtp-devel >= 0.3.0
 BuildRequires:	libsoup-gnome-devel >= 2.26.0
 BuildRequires:	libtool
-BuildRequires:	mono-addins-devel >= 0.3.1-2
+BuildRequires:	mono-addins-devel >= 0.6.2
 BuildRequires:	mono-csharp >= 2.4.3
 BuildRequires:	monodoc
 BuildRequires:	pkgconfig
@@ -54,11 +56,12 @@ BuildRequires:	xz
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	shared-mime-info
-Requires:	gstreamer-GConf >= 0.10.3
-Requires:	gstreamer-cdparanoia >= 0.10.3
+Requires:	gstreamer-GConf >= 0.10.26
+Requires:	gstreamer-cdparanoia >= 0.10.26
 Requires:	hicolor-icon-theme
-Requires:	mono-addins >= 0.3.1-2
+Requires:	mono-addins >= 0.6.2
 Suggests:	brasero
+Suggests:	media-player-info
 Obsoletes:	banshee-official-plugins <= 0.11.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -71,6 +74,23 @@ written in C#.
 Banshee to nowy odtwarzacz dźwięku oparty na bibliotece odtwarzacza
 multimediów GStreamer, rozwijany na platformie .NET Mono, napisany w
 C#.
+
+%package devel
+Summary:	Banshee development files
+Summary(pl.UTF-8):	Pliki programistyczne dla Banshee
+Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
+Requires:	dotnet-dbus-sharp-devel >= 0.7
+Requires:	dotnet-dbus-sharp-glib-devel >= 0.5
+Requires:	dotnet-gtk-sharp2-devel >= 2.12.10
+Requires:	dotnet-taglib-sharp-devel >= 2.0.3.7
+Requires:	mono-addins-devel >= 0.6.2
+
+%description devel
+This package provides development files for Banshee.
+
+%description devel -l pl.UTF-8
+Ten pakiet dostarcza pliki programistyczne dla Banshee.
 
 %prep
 %setup -q
@@ -120,7 +140,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/bamz
 %attr(755,root,root) %{_bindir}/muinshee
 %{_datadir}/banshee
-%{_pkgconfigdir}/banshee*.pc
 %dir %{_libdir}/banshee
 %{_libdir}/banshee/*.dll
 %attr(755,root,root) %{_libdir}/banshee/*.so
@@ -132,6 +151,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/banshee/Extensions/*.exe
 %{_libdir}/banshee/Extensions/*.mdb
 %{_libdir}/banshee/Extensions/Banshee.NotificationArea.dll.config
+%{_libdir}/banshee/Extensions/karma-sharp.dll.config
 %{_libdir}/banshee/Extensions/libgpod-sharp.dll.config
 %dir %{_libdir}/banshee/Backends
 %{_libdir}/banshee/Backends/*.config
@@ -147,3 +167,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/services/org.bansheeproject.CollectionIndexer.service
 %{_datadir}/mime/packages/banshee-amz.xml
 %{_datadir}/mime/packages/banshee-emx.xml
+
+%files devel
+%defattr(644,root,root,755)
+%{_pkgconfigdir}/banshee*.pc
