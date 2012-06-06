@@ -4,12 +4,13 @@
 Summary:	A Mono/GStreamer Based Music Player
 Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name:		banshee
-Version:	2.4.0
+Version:	2.4.1
 Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/banshee/2.4/%{name}-%{version}.tar.xz
-# Source0-md5:	a719717d02ed26cccf4e6432edd48a31
+# Source0-md5:	18d77594e524ff5e51c5cca5c6b31a34
+Patch0:		%{name}-libgpod.patch
 URL:		http://banshee.fm/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.52
@@ -26,7 +27,7 @@ BuildRequires:	dotnet-gtk-sharp-beans-devel >= 2.8
 BuildRequires:	dotnet-gtk-sharp2-devel >= 2.12.10
 BuildRequires:	dotnet-gudev-sharp-devel >= 0.1
 BuildRequires:	dotnet-karma-sharp-devel >= 0.0.5
-BuildRequires:	dotnet-libgpod-sharp-devel >= 0.8.0
+BuildRequires:	dotnet-libgpod-sharp-devel >= 0.8.2
 BuildRequires:	dotnet-mono-upnp-devel >= 0.1
 BuildRequires:	dotnet-mono-zeroconf-devel >= 0.8.0
 BuildRequires:	dotnet-notify-sharp-devel
@@ -94,6 +95,7 @@ Ten pakiet dostarcza pliki programistyczne dla Banshee.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
