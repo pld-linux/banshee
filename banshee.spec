@@ -4,13 +4,12 @@
 Summary:	A Mono/GStreamer Based Music Player
 Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name:		banshee
-Version:	2.4.1
-Release:	2
+Version:	2.6.0
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/banshee/2.4/%{name}-%{version}.tar.xz
-# Source0-md5:	18d77594e524ff5e51c5cca5c6b31a34
-Patch0:		%{name}-libgpod.patch
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/banshee/2.6/%{name}-%{version}.tar.xz
+# Source0-md5:	3b291a0de4c692736b7d8b1b5be038f3
 URL:		http://banshee.fm/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.52
@@ -36,8 +35,8 @@ BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.22.0
 BuildRequires:	gnome-desktop2-devel
 BuildRequires:	gnome-doc-utils >= 0.18.0
-BuildRequires:	gstreamer-devel >= 0.10.26
-BuildRequires:	gstreamer-plugins-base-devel >= 0.10.26
+BuildRequires:	gstreamer0.10-devel >= 0.10.26
+BuildRequires:	gstreamer0.10-plugins-base-devel >= 0.10.26
 BuildRequires:	gtk+2-devel >= 2:2.22.0
 BuildRequires:	gtk-webkit-devel >= 1.2.2
 BuildRequires:	intltool >= 0.35.0
@@ -57,8 +56,8 @@ BuildRequires:	xz
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	shared-mime-info
-Requires:	gstreamer-GConf >= 0.10.26
-Requires:	gstreamer-cdparanoia >= 0.10.26
+Requires:	gstreamer0.10-GConf >= 0.10.26
+Requires:	gstreamer0.10-cdparanoia >= 0.10.26
 Requires:	hicolor-icon-theme
 Requires:	mono-addins >= 0.6.2
 Suggests:	brasero
@@ -95,7 +94,6 @@ Ten pakiet dostarcza pliki programistyczne dla Banshee.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__libtoolize}
