@@ -4,12 +4,12 @@
 Summary:	A Mono/GStreamer Based Music Player
 Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name:		banshee
-Version:	2.6.0
-Release:	2
+Version:	2.6.1
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/banshee/2.6/%{name}-%{version}.tar.xz
-# Source0-md5:	3b291a0de4c692736b7d8b1b5be038f3
+# Source0-md5:	3c7775eecc079a018c468e9b4ab6cbe3
 URL:		http://banshee.fm/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.52
