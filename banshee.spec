@@ -6,7 +6,7 @@ Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name:		banshee
 Version:	2.6.2
 Release:	1
-License:	GPL
+License:	MIT
 Group:		X11/Applications/Multimedia
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/banshee/2.6/%{name}-%{version}.tar.xz
 # Source0-md5:	12dbb8a996783f7081d538062a8589b7
@@ -48,6 +48,7 @@ BuildRequires:	mono-csharp >= 2.4.3
 BuildRequires:	monodoc
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
+BuildRequires:	sed >= 4.0
 BuildRequires:	sqlite3-devel >= 3.4.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libXrandr-devel >= 1.1.1
@@ -94,6 +95,8 @@ Ten pakiet dostarcza pliki programistyczne dla Banshee.
 
 %prep
 %setup -q
+
+%{__sed} -i -e 's/MONO_2_0_COMPILER/MONO_4_0_COMPILER/' configure.ac
 
 %build
 %{__libtoolize}
@@ -157,12 +160,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/banshee/Backends/*.config
 %{_libdir}/banshee/Backends/*.dll
 %{_libdir}/banshee/Backends/*.mdb
-%{_libdir}/banshee/Backends/*.so
+%attr(755,root,root) %{_libdir}/banshee/Backends/*.so
 %{_libdir}/banshee/Banshee.Services.addins
 %{_desktopdir}/banshee-audiocd.desktop
 %{_desktopdir}/banshee-media-player.desktop
 %{_desktopdir}/banshee.desktop
-%{_iconsdir}/hicolor/*/*/*
+%{_iconsdir}/hicolor/*/apps/media-player-banshee.png
+%{_datadir}/appdata/banshee.appdata.xml
 %{_datadir}/dbus-1/services/org.bansheeproject.Banshee.service
 %{_datadir}/dbus-1/services/org.bansheeproject.CollectionIndexer.service
 %{_datadir}/mime/packages/banshee-amz.xml
