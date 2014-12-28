@@ -31,7 +31,7 @@ BuildRequires:	dotnet-mono-upnp-devel >= 0.1
 BuildRequires:	dotnet-mono-zeroconf-devel >= 0.8.0
 BuildRequires:	dotnet-notify-sharp-devel
 BuildRequires:	dotnet-taglib-sharp-devel >= 2.0.3.7
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.22.0
 BuildRequires:	gnome-desktop2-devel
 BuildRequires:	gnome-doc-utils >= 0.18.0
