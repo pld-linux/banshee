@@ -1,11 +1,9 @@
-#
-%include /usr/lib/rpm/macros.mono
-#
+%include	/usr/lib/rpm/macros.mono
 Summary:	A Mono/GStreamer Based Music Player
 Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name:		banshee
 Version:	2.6.2
-Release:	2
+Release:	3
 License:	MIT
 Group:		X11/Applications/Multimedia
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/banshee/2.6/%{name}-%{version}.tar.xz
@@ -17,6 +15,7 @@ BuildRequires:	automake >= 1:1.9
 BuildRequires:	clutter-devel >= 1.2.0
 BuildRequires:	dotnet-dbus-sharp-devel >= 0.7
 BuildRequires:	dotnet-dbus-sharp-glib-devel >= 0.5
+BuildRequires:	dotnet-gconf-sharp-devel >= 2.8
 BuildRequires:	dotnet-gdata-sharp-devel >= 1.5.0
 BuildRequires:	dotnet-gio-sharp-devel >= 0.3
 BuildRequires:	dotnet-gkeyfile-sharp-devel >= 0.1
@@ -96,7 +95,10 @@ Ten pakiet dostarcza pliki programistyczne dla Banshee.
 %prep
 %setup -q
 
+# gmcs is obsolete
 %{__sed} -i -e 's/MONO_2_0_COMPILER/MONO_4_0_COMPILER/' configure.ac
+# disable unnecessary check which fails with mono 4.x
+%{__sed} -i -e '/SHAMROCK_CHECK_MONO_2_0_GAC_ASSEMBLIES/d' configure.ac
 
 %build
 %{__libtoolize}
