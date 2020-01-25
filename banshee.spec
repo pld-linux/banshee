@@ -1,4 +1,3 @@
-%include	/usr/lib/rpm/macros.mono
 Summary:	A Mono/GStreamer Based Music Player
 Summary(pl.UTF-8):	Oparty na Mono/GStreamerze odtwarzacz muzyki
 Name:		banshee
